@@ -93,7 +93,7 @@ const config: Configuration = {
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
    */
-  components: true,
+  components: [{ path: '~/components', extensions: ['vue'] }],
   /*
    ** Nuxt.js modules
    */

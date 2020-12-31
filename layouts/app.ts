@@ -113,17 +113,47 @@ export default class AppLayout extends Vue {
 
   items: Menu[] = [
     {
-      id: 'task',
+      id: 'attendance',
       icon: 'briefcase-outline',
-      title: 'Tugas',
+      title: 'Kehadiran',
       active: true,
       items: [
         {
-          id: 'task.list',
-          title: 'Daftar Tugas',
-          to: '/tasks'
+          id: 'attendace.list',
+          title: 'Daftar Kehadiran',
+          to: '/attendance'
         },
-        { id: 'task.add', title: 'Buat baru', to: '/tasks/add' }
+        {
+          id: 'attendace.add',
+          title: 'Tambah Kehadiran',
+          to: '/attendance/add'
+        }
+      ]
+    },
+    {
+      id: 'guest',
+      icon: 'briefcase-outline',
+      title: 'Tamu',
+      active: true,
+      items: [
+        {
+          id: 'guest.list',
+          title: 'Daftar Tamu',
+          to: '/guests'
+        }
+      ]
+    },
+    {
+      id: 'instance',
+      icon: 'briefcase-outline',
+      title: 'Instansi',
+      active: true,
+      items: [
+        {
+          id: 'instance.list',
+          title: 'Daftar Instansi',
+          to: '/instance'
+        }
       ]
     }
   ];
