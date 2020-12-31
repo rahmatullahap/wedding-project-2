@@ -33,7 +33,7 @@ export default class AppLayout extends Vue {
   rightDrawer = false;
   providerId = 'admin';
   providerName = 'admin';
-  providerLogo = 'assets/images/hr.png';
+  providerLogo = 'hr.png';
   profileName = 'admin';
   profilePicture = 'https://randomuser.me/api/portraits/men/1.jpg';
   profileEmail = 'admin@email.id';
@@ -134,4 +134,11 @@ export default class AppLayout extends Vue {
       to: '/instance'
     }
   ];
+
+  parseImageUrl(path: string): string {
+    if (!path) {
+      return;
+    }
+    return require(`~/assets/images/${path}`);
+  }
 }

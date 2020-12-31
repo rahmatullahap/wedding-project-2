@@ -16,3 +16,10 @@ export function randomArray<T>(
   }
   return values;
 }
+
+export function parseImageUrl(path: string): string {
+  if (!path) {
+    return;
+  }
+  return require(`~/assets/images/${path}`);
+}
