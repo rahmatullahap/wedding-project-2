@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Mutation, State } from 'vuex-class';
-import { Task } from '~/store/task';
 import { DateFilter } from '~/filters/date';
+import { Attendance } from '~/store/attendance';
 
 /**
  * list of tasks page
@@ -15,32 +15,50 @@ import { DateFilter } from '~/filters/date';
 export default class AttendancePage extends Vue {
   @Mutation('dashboard/changeTitle') private changeTitle: any;
   @Mutation('dashboard/changeBreadcrumbs') private changeBreadcrumbs: any;
-  @Mutation('task/done') done: any;
-  @Mutation('task/remove') remove: any;
-  @State((state) => state.task.list) items: Task[];
+  @Mutation('attendance/return') returnMutation: any;
+  @State((state) => state.attendance.list) items: Attendance[];
   headers = [
-    { text: 'Id', value: 'id' },
-    { text: 'Tanggal', value: 'date' },
-    { text: 'Tugas', value: 'title', sortable: false },
+    { text: 'Nama', value: 'name' },
+    { text: 'Waktu Datang', value: 'createdAt', sortable: false },
+    { text: 'Waktu Keluar', value: 'returnedAt', sortable: false },
+    { text: 'Alamat', value: 'address', sortable: false },
     {
-      text: 'Status',
+      text: '',
       align: 'center',
       value: 'status',
-      sortable: false,
+      sortable: true,
       width: 75
     },
     { text: '', align: 'right', value: 'action', sortable: false, width: 140 }
   ];
 
+  loading = false;
+  addDialog = false;
+
+  attendances: Attendance[] = [];
+
   mounted() {
-    this.changeTitle('Daftar Tugas');
+    this.changeTitle('Daftar Hadir Tamu');
     this.changeBreadcrumbs([
       {
         icon: 'briefcase-outline',
-        text: 'daftar tugas',
+        text: 'daftar hadir tamu',
         disabled: true,
-        to: '/tasks'
+        to: '/attendance'
       }
     ]);
+    this.attendances = this.items;
+  }
+
+  addAttendance() {
+    this.addDialog = true;
+  }
+
+  close() {
+    this.addDialog = false;
+  }
+
+  returnGuest(id) {
+    this.returnMutation(id);
   }
 }

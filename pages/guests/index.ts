@@ -17,9 +17,6 @@ export default class GuestsPage extends Vue {
   @Mutation('dashboard/changeBreadcrumbs') private changeBreadcrumbs: any;
   @State((state) => state.attendance.guests) items: Guest[];
   headers = [
-    { text: 'Nama', value: 'name' },
-    { text: 'Panggilan', value: 'nickname', sortable: false },
-    { text: 'Alamat', value: 'address', sortable: false },
     {
       text: '',
       align: 'center',
@@ -27,6 +24,9 @@ export default class GuestsPage extends Vue {
       sortable: true,
       width: 75
     },
+    { text: 'Nama', value: 'name' },
+    { text: 'Panggilan', value: 'nickname', sortable: false },
+    { text: 'Alamat', value: 'address', sortable: false },
     { text: '', align: 'right', value: 'action', sortable: false, width: 140 }
   ];
 

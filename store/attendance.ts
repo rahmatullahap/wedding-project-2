@@ -1,5 +1,5 @@
 import { v4 as uuid } from 'uuid';
-import { fakeGuests } from '~/lib/mock';
+import { fakeGuests, fakeInstances } from '~/lib/mock';
 
 export interface AttendanceState {
   list: Attendance[];
@@ -20,8 +20,8 @@ export interface Guest {
 export interface Instance {
   id: string;
   createdAt: Date;
-  name: boolean;
-  totalGuest: string;
+  name: string;
+  totalGuest: number;
 }
 
 export interface Attendance {
@@ -32,14 +32,14 @@ export interface Attendance {
   guest?: Guest;
   instance?: Instance;
   count: number;
-  returnedDate?: Date;
+  returnedAt?: Date;
 }
 
 export function state(): AttendanceState {
   return {
     list: [],
     guests: fakeGuests(),
-    instances: []
+    instances: fakeInstances()
   };
 }
 
@@ -47,8 +47,8 @@ export interface AttendanceData {
   id?: string;
   name?: string;
   address?: string;
-  guestId?: string;
-  instanceId?: string;
+  guest?: Guest;
+  instance?: Instance;
   count: number;
 }
 
@@ -57,14 +57,15 @@ export const mutations = {
    * create new task
    */
   add(state: AttendanceState, data: AttendanceData) {
-    const attendance = {
+    const attendance: Attendance = {
       id: uuid(),
       createdAt: new Date(),
       name: data.name,
       address: data.address,
-      guestId: data.guestId,
-      instanceId: data.instanceId,
-      count: data.count
+      guest: data.guest,
+      instance: data.instance,
+      count: data.count,
+      returnedAt: null
     };
     state.list.unshift(attendance);
   },
@@ -73,6 +74,6 @@ export const mutations = {
    */
   return(state: AttendanceState, id: string) {
     const idx = state.list.findIndex((att) => att.id === id);
-    state.list[idx].returnedDate = new Date();
+    state.list[idx].returnedAt = new Date();
   }
 };

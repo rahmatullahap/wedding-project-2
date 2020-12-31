@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Mutation, State } from 'vuex-class';
-import { Task } from '~/store/task';
 import { DateFilter } from '~/filters/date';
+import { Instance } from '~/store/attendance';
 
 /**
  * list of tasks page
@@ -15,32 +15,39 @@ import { DateFilter } from '~/filters/date';
 export default class InstancePage extends Vue {
   @Mutation('dashboard/changeTitle') private changeTitle: any;
   @Mutation('dashboard/changeBreadcrumbs') private changeBreadcrumbs: any;
-  @Mutation('task/done') done: any;
-  @Mutation('task/remove') remove: any;
-  @State((state) => state.task.list) items: Task[];
+  @State((state) => state.attendance.instances) items: Instance[];
   headers = [
-    { text: 'Id', value: 'id' },
-    { text: 'Tanggal', value: 'date' },
-    { text: 'Tugas', value: 'title', sortable: false },
-    {
-      text: 'Status',
-      align: 'center',
-      value: 'status',
-      sortable: false,
-      width: 75
-    },
+    { text: 'No', value: 'no', sortable: false },
+    { text: 'Nama', value: 'name' },
     { text: '', align: 'right', value: 'action', sortable: false, width: 140 }
   ];
 
+  loading = false;
+  addDialog = false;
+
+  instances: Instance[] = [];
+  selectedInstance: Instance = null;
+
   mounted() {
-    this.changeTitle('Daftar Tugas');
+    this.changeTitle('Daftar Instansi');
     this.changeBreadcrumbs([
       {
         icon: 'briefcase-outline',
-        text: 'daftar tugas',
+        text: 'daftar instansi',
         disabled: true,
-        to: '/tasks'
+        to: '/instance'
       }
     ]);
+    this.instances = this.items;
+  }
+
+  addAttendance(instanceId) {
+    const instance = this.instances.find((g) => g.id === instanceId);
+    this.selectedInstance = instance;
+    this.addDialog = true;
+  }
+
+  close() {
+    this.addDialog = false;
   }
 }

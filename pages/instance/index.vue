@@ -9,39 +9,36 @@
           'show-first-last-page': true
         }"
         :headers="headers"
-        :items="items"
+        :items="instances"
         item-key="id"
         class="elevation-1"
         no-data-text="Data kosong"
       >
+        <template v-slot:[`item.no`]="{ item }">
+          {{ instances.map((p) => p.id).indexOf(item.id) + 1 }}
+        </template>
         <template v-slot:top>
           <v-toolbar flat>
             <v-spacer></v-spacer>
-            <v-btn small color="primary" to="/tasks/add">
-              <span>buat tugas baru</span>
-              <v-icon small class="ml-2">mdi-briefcase-plus-outline</v-icon>
-            </v-btn>
           </v-toolbar>
         </template>
-        <template v-slot:[`item.date`]="{ item }">
-          {{ _.get(item, 'createdAt', '-') | date }}
-        </template>
-        <template v-slot:[`item.status`]="{ item }">
-          <v-chip v-if="_.get(item, 'done', false)" color="primary" small>
-            selesai
-          </v-chip>
-          <v-chip v-else small>belum selesai</v-chip>
-        </template>
         <template v-slot:[`item.action`]="{ item }">
-          <v-btn icon small @click.stop="remove(item.id)">
-            <v-icon small>mdi-briefcase-remove-outline</v-icon>
-          </v-btn>
-          <v-btn :disabled="item.done" icon small @click.stop="done(item.id)">
-            <v-icon small>mdi-briefcase-check-outline</v-icon>
+          <v-btn
+            :disabled="item.done"
+            icon
+            small
+            @click.stop="addAttendance(item.id)"
+          >
+            <v-icon small>mdi-account-plus</v-icon>
           </v-btn>
         </template>
       </v-data-table>
     </v-card>
+    <add-attendance
+      :dialog="addDialog"
+      :instances="selectedInstance"
+      @close="close"
+    ></add-attendance>
   </v-container>
 </template>
 

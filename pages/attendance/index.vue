@@ -9,7 +9,7 @@
           'show-first-last-page': true
         }"
         :headers="headers"
-        :items="items"
+        :items="attendances"
         item-key="id"
         class="elevation-1"
         no-data-text="Data kosong"
@@ -17,31 +17,36 @@
         <template v-slot:top>
           <v-toolbar flat>
             <v-spacer></v-spacer>
-            <v-btn small color="primary" to="/tasks/add">
-              <span>buat tugas baru</span>
-              <v-icon small class="ml-2">mdi-briefcase-plus-outline</v-icon>
+            <v-btn small color="primary" @click="addAttendance">
+              <span>Tambah tamu baru</span>
+              <v-icon small class="ml-2">mdi-account-plus</v-icon>
             </v-btn>
           </v-toolbar>
         </template>
-        <template v-slot:[`item.date`]="{ item }">
-          {{ _.get(item, 'createdAt', '-') | date }}
+        <template v-slot:[`item.createdAt`]="{ item }">
+          {{ _.get(item, 'createdAt', '-') | date('dd/MM/yyyy HH:mm') }}
+        </template>
+        <template v-slot:[`item.returnedAt`]="{ item }">
+          {{ _.get(item, 'returnedAt', '-') | date('dd/MM/yyyy HH:mm') }}
         </template>
         <template v-slot:[`item.status`]="{ item }">
-          <v-chip v-if="_.get(item, 'done', false)" color="primary" small>
-            selesai
+          <v-chip v-if="_.get(item, 'vip', false)" color="primary" small>
+            VIP
           </v-chip>
-          <v-chip v-else small>belum selesai</v-chip>
         </template>
         <template v-slot:[`item.action`]="{ item }">
-          <v-btn icon small @click.stop="remove(item.id)">
-            <v-icon small>mdi-briefcase-remove-outline</v-icon>
-          </v-btn>
-          <v-btn :disabled="item.done" icon small @click.stop="done(item.id)">
-            <v-icon small>mdi-briefcase-check-outline</v-icon>
+          <v-btn
+            :disabled="item.done"
+            icon
+            small
+            @click.stop="returnGuest(item.id)"
+          >
+            <v-icon small>mdi-keyboard-return</v-icon>
           </v-btn>
         </template>
       </v-data-table>
     </v-card>
+    <add-attendance :dialog="addDialog" @close="close"></add-attendance>
   </v-container>
 </template>
 

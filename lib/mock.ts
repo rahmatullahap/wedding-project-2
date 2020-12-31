@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { date, name, address, random } from 'faker';
+import { date, name, address, random, company } from 'faker';
 import { randomArray } from './helper';
-import { Guest } from '~/store/attendance';
+import { Guest, Instance } from '~/store/attendance';
 
 export function fakeGuest(): Guest {
   return {
@@ -17,4 +17,17 @@ export function fakeGuest(): Guest {
 
 export function fakeGuests(): Guest[] {
   return randomArray(fakeGuest, 10, 20);
+}
+
+export function fakeInstance(): Instance {
+  return {
+    id: uuid(),
+    createdAt: date.past(),
+    name: company.companyName(),
+    totalGuest: 10
+  };
+}
+
+export function fakeInstances(): Instance[] {
+  return randomArray(fakeInstance, 3, 10);
 }

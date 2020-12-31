@@ -22,12 +22,36 @@
             </v-row>
             <v-row>
               <v-col>
+                <v-autocomplete
+                  v-model="attendanceData.instance"
+                  :items="instances"
+                  filled
+                  label="Instansi"
+                  height="50"
+                  item-text="name"
+                  item-value="id"
+                  placeholder="Pilih instansi"
+                ></v-autocomplete>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
                 <v-textarea
+                  v-model="attendanceData.address"
+                  label="Alamat"
+                  filled
+                  required
+                ></v-textarea>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field
                   v-model="attendanceData.count"
                   label="Jumlah hadir"
                   filled
                   required
-                ></v-textarea>
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-card-text>
@@ -36,7 +60,7 @@
             <v-btn @click.stop="closeDialog()">Batal</v-btn>
             <v-btn type="submit" :disabled="!valid" color="primary">
               <v-icon class="mr-2">mdi-content-save-outline</v-icon>
-              Simpan
+              Tambahkan
             </v-btn>
           </v-card-actions>
         </v-form>
