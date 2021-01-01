@@ -94,7 +94,7 @@
         <v-list-item-avatar color="primary" size="36"
           ><v-img
             v-if="providerLogo && providerLogo.length"
-            :src="parseImageUrl(providerLogo)"
+            :src="providerLogo"
           />
           <span v-if="!providerLogo || !providerLogo.length">
             {{ providerName | initial }}

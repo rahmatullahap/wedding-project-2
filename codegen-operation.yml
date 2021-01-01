@@ -1,0 +1,15 @@
+generates:
+  operation.ts:
+    schema: schema.json
+    documents:
+      - pages/**/*.gql
+      - components/**/*.gql
+      - store/**/*.gql
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      maybeValue: T | null | undefined
+hooks:
+  afterOneFileWrite:
+    - prettier --write

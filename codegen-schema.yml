@@ -1,0 +1,7 @@
+generates:
+  schema.json:
+    schema: http://localhost:7788/graphql
+    plugins:
+      - introspection
+    config:
+      minify: false

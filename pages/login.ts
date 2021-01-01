@@ -8,6 +8,6 @@ export default class LoginPage extends Vue {
   email = '';
   password = '';
   login() {
-    window.location.replace('/');
+    window.location.replace('/admin');
   }
 }

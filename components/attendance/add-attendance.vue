@@ -29,7 +29,7 @@
                   label="Instansi"
                   height="50"
                   item-text="name"
-                  item-value="id"
+                  return-object
                   placeholder="Pilih instansi"
                 ></v-autocomplete>
               </v-col>
@@ -49,6 +49,16 @@
                 <v-text-field
                   v-model="attendanceData.count"
                   label="Jumlah hadir"
+                  filled
+                  required
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="attendanceData.souvenirNo"
+                  label="No Souvenir"
                   filled
                   required
                 ></v-text-field>

@@ -17,6 +17,14 @@
         <template v-slot:top>
           <v-toolbar flat>
             <v-spacer></v-spacer>
+            <v-text-field
+              v-model="keywords"
+              class="mt-0 pt-0"
+              append-icon="mdi-magnify"
+              label="Ketik nama tamu..."
+              single-line
+              hide-details
+            />
           </v-toolbar>
         </template>
         <template v-slot:[`item.date`]="{ item }">

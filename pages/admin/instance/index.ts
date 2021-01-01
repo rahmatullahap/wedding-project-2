@@ -35,7 +35,7 @@ export default class InstancePage extends Vue {
         icon: 'briefcase-outline',
         text: 'daftar instansi',
         disabled: true,
-        to: '/instance'
+        to: '/admin/instance'
       }
     ]);
     this.instances = this.items;

@@ -1,5 +1,9 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col>Jumlah yang di dalam ruangan {{ inRoomCount }}</v-col>
+      <v-col>Jumlah yang hadir {{ attendanceCount }}</v-col>
+    </v-row>
     <v-card :disabled="loading">
       <v-data-table
         :footer-props="{
@@ -16,6 +20,10 @@
       >
         <template v-slot:top>
           <v-toolbar flat>
+            <v-btn small color="primary" @click="returnAttendance">
+              <span>Pulangkan</span>
+              <v-icon small class="ml-2">mdi-account-minus</v-icon>
+            </v-btn>
             <v-spacer></v-spacer>
             <v-btn small color="primary" @click="addAttendance">
               <span>Tambah tamu baru</span>
@@ -24,15 +32,24 @@
           </v-toolbar>
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
-          {{ _.get(item, 'createdAt', '-') | date('dd/MM/yyyy HH:mm') }}
+          <v-chip
+            v-if="!_.get(item, 'returnedAt', false)"
+            color="success"
+            small
+          >
+            {{ _.get(item, 'createdAt', '-') | date('dd/MM/yyyy HH:mm') }}
+          </v-chip>
+          <span v-else>
+            {{ _.get(item, 'createdAt', '-') | date('dd/MM/yyyy HH:mm') }}
+          </span>
         </template>
         <template v-slot:[`item.returnedAt`]="{ item }">
-          {{ _.get(item, 'returnedAt', '-') | date('dd/MM/yyyy HH:mm') }}
-        </template>
-        <template v-slot:[`item.status`]="{ item }">
-          <v-chip v-if="_.get(item, 'vip', false)" color="primary" small>
-            VIP
+          <v-chip v-if="_.get(item, 'returnedAt', false)" color="error" small>
+            {{ _.get(item, 'returnedAt', '-') | date('dd/MM/yyyy HH:mm') }}
           </v-chip>
+          <span v-else>
+            {{ _.get(item, 'returnedAt', '-') | date('dd/MM/yyyy HH:mm') }}
+          </span>
         </template>
         <template v-slot:[`item.action`]="{ item }">
           <v-btn
@@ -47,6 +64,10 @@
       </v-data-table>
     </v-card>
     <add-attendance :dialog="addDialog" @close="close"></add-attendance>
+    <return-attendance
+      :dialog="returnDialog"
+      @close="close"
+    ></return-attendance>
   </v-container>
 </template>
 

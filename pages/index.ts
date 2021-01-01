@@ -6,15 +6,33 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class IndexPage extends Vue {
   loading = false;
-  selection: 1;
+  selection = 'timeline';
 
-  icons: ['mdi-home', 'mdi-email', 'mdi-calendar', 'mdi-delete'];
-  items: ['default', 'absolute', 'fixed'];
-  variant: 'default';
+  icons = ['mdi-home', 'mdi-email', 'mdi-calendar', 'mdi-delete'];
+  items = [
+    {
+      color: 'red lighten-2',
+      icon: 'mdi-star'
+    },
+    {
+      color: 'purple darken-1',
+      icon: 'mdi-book-variant'
+    },
+    {
+      color: 'green lighten-1',
+      icon: 'mdi-airballoon'
+    },
+    {
+      color: 'indigo',
+      icon: 'mdi-buffer'
+    }
+  ];
 
-  mounted() {
-    // this.$router.push({ path: '/tasks' });
-  }
+  variant = 'default';
+
+  title = 'Landing Page';
+
+  mounted() {}
 
   reserve() {
     this.loading = true;

@@ -53,7 +53,8 @@ export default class AddAttendanceComponent extends Vue {
       address: this.attendanceData.address,
       guest: this.attendanceData.guest,
       instance: this.attendanceData.instance,
-      name: this.attendanceData.name
+      name: this.attendanceData.name,
+      souvenirNo: this.attendanceData.souvenirNo
     };
     this.add(attendance);
     this.closeDialog();

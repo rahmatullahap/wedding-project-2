@@ -5,7 +5,7 @@ import { Guest, Instance } from '~/store/attendance';
 
 export function fakeGuest(): Guest {
   return {
-    id: uuid(),
+    id: 'uuid()',
     createdAt: date.past(),
     name: name.findName(),
     address: address.streetAddress(),

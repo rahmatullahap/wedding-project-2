@@ -8,13 +8,13 @@ export interface AttendanceState {
 }
 
 export interface Guest {
-  id: string;
-  createdAt: Date;
+  id?: string;
+  createdAt?: Date;
   name: string;
-  nickname: string;
+  nickname?: string;
   address: string;
   vip: boolean;
-  instance: Instance;
+  instance?: Instance;
 }
 
 export interface Instance {
@@ -33,6 +33,7 @@ export interface Attendance {
   instance?: Instance;
   count: number;
   returnedAt?: Date;
+  souvenirNo?: number;
 }
 
 export function state(): AttendanceState {
@@ -49,6 +50,7 @@ export interface AttendanceData {
   address?: string;
   guest?: Guest;
   instance?: Instance;
+  souvenirNo?: number;
   count: number;
 }
 
@@ -65,7 +67,8 @@ export const mutations = {
       guest: data.guest,
       instance: data.instance,
       count: data.count,
-      returnedAt: null
+      returnedAt: null,
+      souvenirNo: data.souvenirNo
     };
     state.list.unshift(attendance);
   },
@@ -74,6 +77,13 @@ export const mutations = {
    */
   return(state: AttendanceState, id: string) {
     const idx = state.list.findIndex((att) => att.id === id);
+    state.list[idx].returnedAt = new Date();
+  },
+  /**
+   * return guest by souvenir no, when guest go home
+   */
+  returnBySouvenir(state: AttendanceState, no: number) {
+    const idx = state.list.findIndex((att) => att.souvenirNo === no);
     state.list[idx].returnedAt = new Date();
   }
 };

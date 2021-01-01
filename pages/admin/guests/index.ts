@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Mutation, State } from 'vuex-class';
 import { DateFilter } from '~/filters/date';
 import { Guest } from '~/store/attendance';
@@ -36,6 +36,8 @@ export default class GuestsPage extends Vue {
   guests: Guest[] = [];
   selectedGuest: Guest = null;
 
+  keywords = '';
+
   mounted() {
     this.changeTitle('Daftar Tamu');
     this.changeBreadcrumbs([
@@ -43,10 +45,24 @@ export default class GuestsPage extends Vue {
         icon: 'briefcase-outline',
         text: 'daftar tamu',
         disabled: true,
-        to: '/guests'
+        to: '/admin/guests'
       }
     ]);
     this.guests = this.items;
+  }
+
+  @Watch('keywords')
+  onKeywordChange() {
+    if (this.keywords === '') {
+      this.guests = this.items;
+    } else {
+      this.guests = this.items.filter(
+        (i) =>
+          i.name.toLowerCase().includes(this.keywords.toLowerCase()) ||
+          // i.nickname.toLowerCase().includes(this.keywords.toLowerCase()) ||
+          i.address.toLowerCase().includes(this.keywords.toLowerCase())
+      );
+    }
   }
 
   addAttendance(guestId) {

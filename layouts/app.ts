@@ -15,6 +15,7 @@ export interface Menu {
  * Default layout page
  */
 @Component({
+  middleware: ['authorized'],
   filters: {
     initial: InitialFilter
   }
@@ -33,9 +34,9 @@ export default class AppLayout extends Vue {
   rightDrawer = false;
   providerId = 'admin';
   providerName = 'admin';
-  providerLogo = 'hr.png';
+  providerLogo = require(`~/assets/images/hr.png`);
   profileName = 'admin';
-  profilePicture = 'https://randomuser.me/api/portraits/men/1.jpg';
+  profilePicture = require(`~/assets/images/hr.png`);
   profileEmail = 'admin@email.id';
   access = '*';
   isUpdate = false;
@@ -117,28 +118,21 @@ export default class AppLayout extends Vue {
       icon: 'account-multiple',
       title: 'Kehadiran',
       active: true,
-      to: '/attendance'
+      to: '/admin/attendance'
     },
     {
       id: 'guest',
       icon: 'account-group',
       title: 'Tamu',
       active: true,
-      to: '/guests'
+      to: '/admin/guests'
     },
     {
       id: 'instance',
       icon: 'domain',
       title: 'Instansi',
       active: true,
-      to: '/instance'
+      to: '/admin/instance'
     }
   ];
-
-  parseImageUrl(path: string): string {
-    if (!path) {
-      return;
-    }
-    return require(`~/assets/images/${path}`);
-  }
 }

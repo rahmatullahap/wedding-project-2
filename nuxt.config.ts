@@ -104,7 +104,8 @@ const config: Configuration = {
   buildModules: [
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
-    '@nuxt/typescript-build'
+    '@nuxt/typescript-build',
+    '~/modules/backend-api'
   ],
   /**
    * typesript configurations
@@ -113,6 +114,13 @@ const config: Configuration = {
     typeCheck: {
       eslint: true
     }
+  },
+  /**
+   * api configurations
+   */
+  backend: {
+    apiUrl: process.env.API_URL,
+    subscriptionUrl: process.env.SUBSCRIPTION_URL
   },
   /*
    ** vuetify module configuration
