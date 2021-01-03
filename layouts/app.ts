@@ -126,13 +126,13 @@ export default class AppLayout extends Vue {
       title: 'Tamu',
       active: true,
       to: '/admin/guests'
-    },
-    {
-      id: 'instance',
-      icon: 'domain',
-      title: 'Instansi',
-      active: true,
-      to: '/admin/instance'
     }
+    // {
+    //   id: 'instance',
+    //   icon: 'domain',
+    //   title: 'Instansi',
+    //   active: true,
+    //   to: '/admin/instance'
+    // }
   ];
 }

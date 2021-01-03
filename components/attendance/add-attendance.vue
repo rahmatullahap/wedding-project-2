@@ -22,22 +22,8 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-autocomplete
-                  v-model="attendanceData.instance"
-                  :items="instances"
-                  filled
-                  label="Instansi"
-                  height="50"
-                  item-text="name"
-                  return-object
-                  placeholder="Pilih instansi"
-                ></v-autocomplete>
-              </v-col>
-            </v-row>
-            <v-row>
-              <v-col>
                 <v-textarea
-                  v-model="attendanceData.address"
+                  v-model="attendanceData.detail"
                   label="Alamat"
                   filled
                   required

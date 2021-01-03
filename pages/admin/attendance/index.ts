@@ -22,7 +22,7 @@ export default class AttendancePage extends Vue {
     { text: 'Nama', value: 'name' },
     { text: 'Waktu Datang', value: 'createdAt', sortable: false },
     { text: 'Waktu Keluar', value: 'returnedAt', sortable: false },
-    { text: 'Alamat', value: 'address', sortable: false },
+    { text: 'Alamat', value: 'detail', sortable: false },
     { text: 'Jumlah', value: 'count', sortable: false },
     {
       text: '',

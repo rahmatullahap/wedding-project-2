@@ -26,7 +26,7 @@ export default class GuestsPage extends Vue {
     },
     { text: 'Nama', value: 'name' },
     { text: 'Panggilan', value: 'nickname', sortable: false },
-    { text: 'Alamat', value: 'address', sortable: false },
+    { text: 'Alamat', value: 'detail', sortable: false },
     { text: '', align: 'right', value: 'action', sortable: false, width: 140 }
   ];
 
@@ -60,7 +60,7 @@ export default class GuestsPage extends Vue {
         (i) =>
           i.name.toLowerCase().includes(this.keywords.toLowerCase()) ||
           // i.nickname.toLowerCase().includes(this.keywords.toLowerCase()) ||
-          i.address.toLowerCase().includes(this.keywords.toLowerCase())
+          i.detail.toLowerCase().includes(this.keywords.toLowerCase())
       );
     }
   }

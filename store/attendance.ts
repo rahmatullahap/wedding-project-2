@@ -12,9 +12,8 @@ export interface Guest {
   createdAt?: Date;
   name: string;
   nickname?: string;
-  address: string;
+  detail: string;
   vip: boolean;
-  instance?: Instance;
 }
 
 export interface Instance {
@@ -28,7 +27,7 @@ export interface Attendance {
   id: string;
   createdAt: Date;
   name?: string;
-  address?: string;
+  detail?: string;
   guest?: Guest;
   instance?: Instance;
   count: number;
@@ -47,7 +46,7 @@ export function state(): AttendanceState {
 export interface AttendanceData {
   id?: string;
   name?: string;
-  address?: string;
+  detail?: string;
   guest?: Guest;
   instance?: Instance;
   souvenirNo?: number;
@@ -63,7 +62,7 @@ export const mutations = {
       id: uuid(),
       createdAt: new Date(),
       name: data.name,
-      address: data.address,
+      detail: data.detail,
       guest: data.guest,
       instance: data.instance,
       count: data.count,

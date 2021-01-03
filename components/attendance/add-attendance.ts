@@ -1,5 +1,5 @@
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator';
-import { Mutation, State } from 'vuex-class';
+import { Mutation } from 'vuex-class';
 import { DateFilter } from '~/filters/date';
 import { AttendanceData, Guest, Instance } from '~/store/attendance';
 
@@ -16,7 +16,6 @@ export default class AddAttendanceComponent extends Vue {
   @Prop({ required: false }) guest: Guest;
   @Prop({ required: false }) instance: Instance;
   @Mutation('attendance/add') add: any;
-  @State((state) => state.attendance.instances) instances: Instance[];
 
   attendanceData: AttendanceData = {
     count: 1,
@@ -35,9 +34,8 @@ export default class AddAttendanceComponent extends Vue {
       if (this.guest) {
         // load by guest
         this.attendanceData.guest = this.guest;
-        this.attendanceData.instance = this.guest.instance;
         this.attendanceData.name = this.guest.name;
-        this.attendanceData.address = this.guest.address;
+        this.attendanceData.detail = this.guest.detail;
         this.type = 'guest';
       } else if (this.instance) {
         // load by instance
@@ -50,7 +48,7 @@ export default class AddAttendanceComponent extends Vue {
   save() {
     const attendance: AttendanceData = {
       count: this.attendanceData.count,
-      address: this.attendanceData.address,
+      detail: this.attendanceData.detail,
       guest: this.attendanceData.guest,
       instance: this.attendanceData.instance,
       name: this.attendanceData.name,
