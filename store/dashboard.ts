@@ -20,7 +20,7 @@ export interface Breadcrumb {
  */
 export function state(): DashboardState {
   return {
-    title: 'Wedding Hansa & Rahmat',
+    title: 'Wedding Hasna & Rahmat',
     darkTheme: false,
     miniMenu: false,
     breadcrumbs: [rootBreadcrumb]

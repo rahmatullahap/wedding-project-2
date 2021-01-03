@@ -9,28 +9,12 @@ export default class IndexPage extends Vue {
   selection = 'timeline';
 
   icons = ['mdi-home', 'mdi-email', 'mdi-calendar', 'mdi-delete'];
-  items = [
-    {
-      color: 'red lighten-2',
-      icon: 'mdi-star'
-    },
-    {
-      color: 'purple darken-1',
-      icon: 'mdi-book-variant'
-    },
-    {
-      color: 'green lighten-1',
-      icon: 'mdi-airballoon'
-    },
-    {
-      color: 'indigo',
-      icon: 'mdi-buffer'
-    }
-  ];
 
   variant = 'default';
 
   title = 'Landing Page';
+
+  header = require(`~/assets/images/header1.png`);
 
   mounted() {}
 

@@ -33,7 +33,7 @@ export default class AppLayout extends Vue {
   leftDrawer = true;
   rightDrawer = false;
   providerId = 'admin';
-  providerName = 'admin';
+  providerName = 'Hasna & Rahmat';
   providerLogo = require(`~/assets/images/hr.png`);
   profileName = 'admin';
   profilePicture = require(`~/assets/images/hr.png`);

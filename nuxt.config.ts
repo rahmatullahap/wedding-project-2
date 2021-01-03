@@ -97,7 +97,13 @@ const config: Configuration = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios'],
+  /*
+   ** Nuxt.js axios
+   */
+  axios: {
+    // proxy: true
+  },
   /*
    ** Nuxt.js dev-modules
    */
@@ -105,6 +111,7 @@ const config: Configuration = {
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify',
     '@nuxt/typescript-build',
+    '@nuxtjs/axios',
     '~/modules/backend-api'
   ],
   /**

@@ -1,22 +1,19 @@
 <template>
   <v-app dark>
     <!-- left menu -->
-    <v-navigation-drawer
-      v-model="leftDrawer"
-      :mini-variant="miniMenu"
-      fixed
-      app
-    >
-      <v-container pa-0 pb-4 px-4>
-        <v-text-field
-          v-model="search"
-          append-icon="mdi-magnify"
-          label="cari di menu..."
-          single-line
-          hide-details
-        />
-      </v-container>
-      <v-divider />
+    <v-navigation-drawer :mini-variant="leftDrawer" class="primary" fixed app>
+      <v-list-item>
+        <v-list-item-avatar>
+          <v-img :src="providerLogo"></v-img>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title class="title"> Wedding </v-list-item-title>
+          <v-list-item-subtitle> {{ providerName }} </v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+
+      <v-divider></v-divider>
+
       <v-list nav dense>
         <template v-for="(item, i) in menuFilter(items, search)">
           <v-list-item v-if="!item.items" :key="i" :to="item.to">
@@ -53,28 +50,17 @@
           </v-list-group>
         </template>
       </v-list>
-      <v-list dense>
-        <v-subheader>pengaturan tampilan</v-subheader>
-        <v-divider />
-        <v-list-item @click.prevent="toggleTheme()">
-          <v-list-item-action>
-            <v-icon
-              >mdi-{{ darkTheme ? 'brightness-3' : 'brightness-5' }}</v-icon
-            >
-          </v-list-item-action>
-          <v-list-item-title
-            >tema {{ darkTheme ? 'terang' : 'gelap' }}</v-list-item-title
-          >
-        </v-list-item>
-        <v-list-item @click.prevent="toggleMiniMenu()">
-          <v-list-item-action>
-            <v-icon>
-              mdi-{{ miniMenu ? 'view-split-vertical' : 'view-quilt' }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>menu minimal</v-list-item-title>
-        </v-list-item>
-      </v-list>
+
+      <template v-slot:append>
+        <div v-if="!leftDrawer" class="pa-2">
+          <v-btn class="secondary" block @click="logout"> Logout </v-btn>
+        </div>
+        <div v-if="leftDrawer" class="pa-2">
+          <v-btn icon @click="logout">
+            <v-icon color="white">mdi-logout</v-icon>
+          </v-btn>
+        </div>
+      </template>
     </v-navigation-drawer>
 
     <!-- app bar -->
@@ -82,25 +68,6 @@
       <v-app-bar-nav-icon @click="leftDrawer = !leftDrawer" />
       <v-toolbar-title>{{ title }}</v-toolbar-title>
       <v-spacer />
-      <v-list-item
-        two-line
-        style="flex-basis: auto; flex-grow: 0"
-        @click.stop="rightDrawer = !rightDrawer"
-      >
-        <v-list-item-content class="text-right">
-          <v-list-item-title>{{ providerName }}</v-list-item-title>
-          <v-list-item-subtitle>@{{ providerId }}</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-avatar color="primary" size="36"
-          ><v-img
-            v-if="providerLogo && providerLogo.length"
-            :src="providerLogo"
-          />
-          <span v-if="!providerLogo || !providerLogo.length">
-            {{ providerName | initial }}
-          </span>
-        </v-list-item-avatar>
-      </v-list-item>
     </v-app-bar>
 
     <!-- main page -->
