@@ -1,34 +1,39 @@
 <template>
   <v-app dark style="overflow: hidden">
-    <v-toolbar
-      color="primary"
-      prominent
-      :src="header"
-      extended
-      extension-height="400"
-    >
-      <!-- <v-toolbar-title>{{ title }}</v-toolbar-title>
-      <v-spacer></v-spacer> -->
-    </v-toolbar>
+    <v-banner single-line sticky> #RahmatUntukHasna </v-banner>
+    <v-carousel hide-delimiters :show-arrows="false" height="250">
+      <v-carousel-item
+        v-for="(item, i) in items"
+        :key="i"
+        :src="item.src"
+        active-class="header-carousel"
+      >
+        <v-sheet color="transparent" height="100%">
+          <v-row class="fill-height" align="center" justify="center">
+            <div class="header-title">Hasna & Rahmat</div>
+          </v-row>
+        </v-sheet></v-carousel-item
+      >
+    </v-carousel>
 
     <v-main style="padding-bottom: 60px">
-      <v-container class="fill-height" style="padding-bottom: 60px">
+      <v-container class="pa-0" style="padding-bottom: 60px">
         <div
-          v-if="selection === 'invitation'"
+          v-if="selection === 0"
           class="content"
           style="height: 95%; width: 100%"
         >
           <event></event>
         </div>
         <div
-          v-if="selection === 'timeline'"
+          v-if="selection === 1"
           class="content"
           style="height: 95%; width: 100%"
         >
           <timeline></timeline>
         </div>
         <div
-          v-if="selection === 'message'"
+          v-if="selection === 2"
           class="content"
           style="height: 95%; width: 100%"
         >

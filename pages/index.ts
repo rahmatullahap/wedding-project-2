@@ -6,7 +6,7 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class IndexPage extends Vue {
   loading = false;
-  selection = 'timeline';
+  selection = 1;
 
   icons = ['mdi-home', 'mdi-email', 'mdi-calendar', 'mdi-delete'];
 
@@ -14,7 +14,11 @@ export default class IndexPage extends Vue {
 
   title = 'Landing Page';
 
-  header = require(`~/assets/images/header1.png`);
+  items = [
+    {
+      src: require(`~/assets/images/cover_event.jpg`)
+    }
+  ];
 
   mounted() {}
 

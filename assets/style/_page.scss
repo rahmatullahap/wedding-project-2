@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'ananda';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('~assets/fonts/Ananda.ttf') format('truetype');
+}
+
 // page transition animations
 .page-enter-active,
 .page-leave-active {
@@ -29,3 +37,25 @@
 
 // pray
 
+.header-title {
+  text-align: center;
+  font-family: 'ananda' !important;
+  color: black;
+  font-size: 2em;
+}
+
+.header-carousel {
+  .v-image__image {
+    opacity: 0.5;
+  }
+}
+
+.content-card {
+  border: none !important;
+}
+
+.session-chip {
+  .v-slide-group__content {
+    justify-content: center;
+  }
+}

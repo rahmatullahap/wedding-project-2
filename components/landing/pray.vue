@@ -59,8 +59,21 @@
         indeterminate
       ></v-progress-circular>
       <v-row v-if="!loading" dense>
-        <v-col v-for="(item, i) in items" :key="i" cols="4">
-          <v-card :color="item.color" dark style="height: 175px">
+        <v-col
+          v-for="(item, i) in items"
+          :key="i"
+          lg="4"
+          md="6"
+          sm="12"
+          xs="12"
+        >
+          <v-card
+            :color="item.color"
+            dark
+            style="height: 200px"
+            elevation="0"
+            outlined="false"
+          >
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
                 <v-card-title

@@ -29,8 +29,7 @@ export default class TimelineComponent extends Vue {
       description: `Setelah istikhoroh, Rahmat dan Hasna sepakat untuk melanjutkan
       taaruf ke tahap keluarga. Rahmat bersilaturahim ke rumah Hasna
       didampingi Ustadz Faruq. Rahmat memperkenalkan diri dan menyatakan
-      niatnya kepada keluarga Hasna.`,
-      gallery: [`assets/images/gallery/3.jpg`]
+      niatnya kepada keluarga Hasna.`
     },
     {
       color: 'indigo',
@@ -40,8 +39,7 @@ export default class TimelineComponent extends Vue {
       dari kedua belah pihak dapat lebih mengenal. Dalam pertemuan
       tersebut, Rahmat menyatakan untuk mengkhitbah Hasna langsung.
       Kemudian kedua keluarga mendiskusikan untuk tahapan
-      selanjutnya.`,
-      gallery: [`assets/images/gallery/4.jpg`]
+      selanjutnya.`
     },
     {
       color: 'indigo',
@@ -49,12 +47,7 @@ export default class TimelineComponent extends Vue {
       title: 'Silaturahim Keluarga Besar',
       description: `Pertemuan dua keluarga besar di Guest House Puspiptek dalam
       rangka silaturahim serta pemberian informasi perencanaan hari
-      H.`,
-      gallery: [
-        `assets/images/gallery/5.jpg`,
-        `assets/images/gallery/5_1.jpg`,
-        `assets/images/gallery/5_2.jpg`
-      ]
+      H.`
     },
     {
       color: 'indigo',
@@ -62,6 +55,14 @@ export default class TimelineComponent extends Vue {
       title: 'Akad',
       description: `Akad Nikah`
     }
+  ];
+
+  gallery = [
+    `assets/images/gallery/3.jpg`,
+    `assets/images/gallery/4.jpg`,
+    `assets/images/gallery/5.jpg`,
+    `assets/images/gallery/5_1.jpg`,
+    `assets/images/gallery/5_2.jpg`
   ];
 
   mounted() {}
