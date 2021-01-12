@@ -1,8 +1,9 @@
 {
-  "name": "wedding-project-2",
+  "name": "wedding-hasna-rahmat",
   "version": "1.0.0",
   "author": "Pranatadesta",
   "private": true,
+  "description": "Wedding Hasna & Rahmat",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build && nuxt-ts export",

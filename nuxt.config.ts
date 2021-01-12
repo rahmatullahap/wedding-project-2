@@ -46,7 +46,7 @@ const config: Configuration = {
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content: 'Wedding Hasna & Rahmat'
       }
     ],
     link: [
