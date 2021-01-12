@@ -35,4 +35,8 @@ export default class EventComponent extends Vue {
   }
 
   onSessionChange() {}
+
+  openMap() {
+    window.location.href = 'https://goo.gl/maps/b5KXyFERELt5N15RA';
+  }
 }

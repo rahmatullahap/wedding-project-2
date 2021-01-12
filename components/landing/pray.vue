@@ -1,6 +1,13 @@
 <template>
-  <div>
-    <v-card :loading="loading" :disabled="loading">
+  <div class="pa-2">
+    <!-- <v-card
+      :loading="loading"
+      :disabled="loading"
+      class="content-card"
+      flat
+      tile
+      :outlined="false"
+    >
       <v-card-title>
         <v-spacer class="headline">Kirim Doa</v-spacer>
       </v-card-title>
@@ -97,7 +104,27 @@
           </v-card>
         </v-col>
       </v-row>
-    </div>
+    </div> -->
+    <v-row class="pa-2">
+      <v-col v-for="(gal, j) of gallery" :key="j" cols="4">
+        <v-img
+          :src="getSrc(gal)"
+          :lazy-src="getSrc(gal)"
+          aspect-ratio="1"
+          max-height="250"
+          class="grey lighten-2"
+        >
+          <template v-slot:placeholder>
+            <v-row class="fill-height ma-0" align="center" justify="center">
+              <v-progress-circular
+                indeterminate
+                color="grey lighten-5"
+              ></v-progress-circular>
+            </v-row>
+          </template>
+        </v-img>
+      </v-col>
+    </v-row>
   </div>
 </template>
 

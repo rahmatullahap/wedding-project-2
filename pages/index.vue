@@ -1,6 +1,6 @@
 <template>
   <v-app dark style="overflow: hidden">
-    <v-banner single-line sticky> #RahmatUntukHasna </v-banner>
+    <v-banner single-line sticky> #WeddingHasnaRahmat </v-banner>
     <v-carousel hide-delimiters :show-arrows="false" height="250">
       <v-carousel-item
         v-for="(item, i) in items"
@@ -19,21 +19,21 @@
     <v-main style="padding-bottom: 60px">
       <v-container class="pa-0" style="padding-bottom: 60px">
         <div
-          v-if="selection === 0"
+          v-if="selection === 'event'"
           class="content"
           style="height: 95%; width: 100%"
         >
           <event></event>
         </div>
         <div
-          v-if="selection === 1"
+          v-if="selection === 'about'"
           class="content"
           style="height: 95%; width: 100%"
         >
           <timeline></timeline>
         </div>
         <div
-          v-if="selection === 2"
+          v-if="selection === 'pray'"
           class="content"
           style="height: 95%; width: 100%"
         >
@@ -44,19 +44,19 @@
     <v-footer :absolute="true" :padless="true" style="position: fixed">
       <v-card flat tile width="100%" class="red lighten-1 text-center">
         <v-bottom-navigation v-model="selection" color="primary">
-          <v-btn value="timeline">
+          <v-btn value="about">
             <span>About Us</span>
             <v-icon>mdi-heart</v-icon>
           </v-btn>
 
-          <v-btn value="invitation">
+          <v-btn value="event">
             <span>Event</span>
             <v-icon>mdi-calendar-month</v-icon>
           </v-btn>
 
-          <v-btn value="message">
-            <span>Prays</span>
-            <v-icon>mdi-message</v-icon>
+          <v-btn value="pray">
+            <span>Gallery</span>
+            <v-icon>mdi-grid</v-icon>
           </v-btn>
         </v-bottom-navigation>
         <!-- <v-divider></v-divider> -->

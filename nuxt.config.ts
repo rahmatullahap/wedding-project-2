@@ -38,7 +38,7 @@ const config: Configuration = {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: 'Wedding Project',
+    titleTemplate: 'Wedding Hasna & Rahmat',
     title: 'Wedding Hasna & Rahmat',
     meta: [
       { charset: 'utf-8' },

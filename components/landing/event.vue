@@ -3,7 +3,7 @@
     <v-card class="content-card" flat tile :outlined="false">
       <v-card-title class="justify-center">Counter to the event</v-card-title>
       <v-card-text class="justify-center text-center">
-        <div>{{ countdown }}</div>
+        <h2>{{ countdown }}</h2>
       </v-card-text>
     </v-card>
     <v-card
@@ -37,6 +37,13 @@
       <v-card-text class="justify-center text-center">
         <div>Kologdam Grand Ballroom Jl. Aceh No. 50 Merdeka, Bandung</div>
       </v-card-text>
+
+      <div class="text-center justify-center">
+        <v-btn color="secondary" class="ma-2 white--text" @click="openMap">
+          <v-icon left dark> mdi-map-marker </v-icon>
+          Map
+        </v-btn>
+      </div>
 
       <v-divider class="mx-4"></v-divider>
 

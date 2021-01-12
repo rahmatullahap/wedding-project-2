@@ -4,8 +4,8 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class TimelineComponent extends Vue {
   items = [
     {
-      color: 'red lighten-2',
-      icon: 'mdi-star',
+      color: 'primary',
+      icon: 'mdi-source-commit-start',
       title: 'Where We Began',
       description: `Rahmat dan Hasna merupakan Senior-Junior di Jurusan Teknik Informatika
       Unpad. Karena perbedaan angkatan cukup jauh, mereka belum saling
@@ -14,8 +14,8 @@ export default class TimelineComponent extends Vue {
       memutuskan untuk mulai taaruf dengan Hasna.`
     },
     {
-      color: 'purple darken-1',
-      icon: 'mdi-book-variant',
+      color: 'primary',
+      icon: 'mdi-text-box',
       title: 'Bertukar CV',
       description: `Ketika kedua belah pihak sudah menyatakan siap untuk menikah,
       maka bertukar CV merupakan langkah untuk mengetahui detail
@@ -23,8 +23,8 @@ export default class TimelineComponent extends Vue {
       sepakat untuk melanjutkan taaruf ke tahap berikutnya.`
     },
     {
-      color: 'green lighten-1',
-      icon: 'mdi-airballoon',
+      color: 'primary',
+      icon: 'mdi-nature-people',
       title: 'Taaruf dengan Keluarga',
       description: `Setelah istikhoroh, Rahmat dan Hasna sepakat untuk melanjutkan
       taaruf ke tahap keluarga. Rahmat bersilaturahim ke rumah Hasna
@@ -32,8 +32,8 @@ export default class TimelineComponent extends Vue {
       niatnya kepada keluarga Hasna.`
     },
     {
-      color: 'indigo',
-      icon: 'mdi-buffer',
+      color: 'primary',
+      icon: 'mdi-account-multiple',
       title: 'Silaturahim Keluarga & khitbah',
       description: `Rahmat bersama keluarga datang ke Puspiptek. Disini keluarga
       dari kedua belah pihak dapat lebih mengenal. Dalam pertemuan
@@ -42,18 +42,19 @@ export default class TimelineComponent extends Vue {
       selanjutnya.`
     },
     {
-      color: 'indigo',
-      icon: 'mdi-buffer',
+      color: 'primary',
+      icon: 'mdi-account-group',
       title: 'Silaturahim Keluarga Besar',
       description: `Pertemuan dua keluarga besar di Guest House Puspiptek dalam
       rangka silaturahim serta pemberian informasi perencanaan hari
       H.`
     },
     {
-      color: 'indigo',
-      icon: 'mdi-buffer',
+      color: 'primary',
+      icon: 'mdi-ring',
       title: 'Akad',
-      description: `Akad Nikah`
+      description: `Akad Nikah dilaksanakan pada tanggal 20 Juni 2020 di Masjid Bahrul Ulum, 
+      Tangerang Selatan`
     }
   ];
 

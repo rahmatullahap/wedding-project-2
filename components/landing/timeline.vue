@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pa-2">
     <v-timeline align-top :dense="$vuetify.breakpoint.smAndDown">
       <v-timeline-item
         v-for="(item, i) in items"
@@ -17,7 +17,7 @@
       </v-timeline-item>
     </v-timeline>
 
-    <v-row class="pa-2">
+    <!-- <v-row class="pa-2">
       <v-col v-for="(gal, j) of gallery" :key="j" cols="4">
         <v-img
           :src="getSrc(gal)"
@@ -36,7 +36,7 @@
           </template>
         </v-img>
       </v-col>
-    </v-row>
+    </v-row> -->
   </div>
 </template>
 

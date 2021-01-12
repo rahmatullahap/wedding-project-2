@@ -22,9 +22,31 @@ export default class PrayComponent extends Vue {
   instagram = '';
   items = [];
 
-  async mounted() {
+  gallery = [
+    `assets/images/gallery/1.jpg`,
+    `assets/images/gallery/2.jpg`,
+    `assets/images/gallery/3.jpg`,
+    `assets/images/gallery/4.jpg`,
+    `assets/images/gallery/5.jpg`,
+    `assets/images/gallery/6.jpg`,
+    `assets/images/gallery/7.jpg`,
+    `assets/images/gallery/8.jpg`,
+    `assets/images/gallery/9.jpg`,
+    `assets/images/gallery/10.jpg`,
+    `assets/images/gallery/11.jpg`,
+    `assets/images/gallery/12.jpg`,
+    `assets/images/gallery/13.jpg`,
+    `assets/images/gallery/14.jpg`,
+    `assets/images/gallery/15.jpg`,
+    `assets/images/gallery/16.jpg`,
+    `assets/images/gallery/17.jpg`,
+    `assets/images/gallery/18.jpg`,
+    `assets/images/gallery/19.jpg`
+  ];
+
+  mounted() {
     this.loading = true;
-    this.items = await this.getData();
+    // this.items = await this.getData();
     this.loading = false;
   }
 
@@ -56,7 +78,7 @@ export default class PrayComponent extends Vue {
       {
         color: '#952175',
         src: await this.getInstagramProfile('cristiano'),
-        name: 'Cristiano Ronaldo',
+        name: 'Cristiano',
         message: 'Wilujeng Euy, Doakeun aing nyusul'
       },
       {
