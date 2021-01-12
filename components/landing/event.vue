@@ -3,7 +3,8 @@
     <v-card class="content-card" flat tile :outlined="false">
       <v-card-title class="justify-center">Counter to the event</v-card-title>
       <v-card-text class="justify-center text-center">
-        <h2>{{ countdown }}</h2>
+        <h2 v-if="duration > 0">{{ countdown }}</h2>
+        <h2 v-if="duration <= 0">DONE !</h2>
       </v-card-text>
     </v-card>
     <v-card
@@ -62,6 +63,8 @@
           <v-chip :value="3">Sesi 3</v-chip>
         </v-chip-group>
       </v-card-text>
+
+      <v-img height="250" :src="protocol"></v-img>
 
       <!-- <v-card-actions>
       <v-btn color="primary lighten-2" text @click="reserve">

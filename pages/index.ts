@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 
 /**
  * This page use as default routes
@@ -21,6 +21,25 @@ export default class IndexPage extends Vue {
   ];
 
   mounted() {}
+
+  @Watch('selection')
+  onSelectionChange() {
+    if (this.selection === 'about') {
+      this.items = [
+        {
+          src: require(`~/assets/images/cover_about.jpg`)
+        }
+      ];
+    }
+
+    if (this.selection === 'pray' || this.selection === 'event') {
+      this.items = [
+        {
+          src: require(`~/assets/images/cover_event.jpg`)
+        }
+      ];
+    }
+  }
 
   reserve() {
     this.loading = true;

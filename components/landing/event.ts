@@ -4,15 +4,19 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class EventComponent extends Vue {
   loading = false;
-  selection = 2;
+  selection = 1;
 
   nowTimer: NodeJS.Timeout;
 
   countdown = '';
 
-  header = require(`~/assets/images/cover_about.jpg`);
+  header = require(`~/assets/images/kologdam.jpg`);
+  protocol = require(`~/assets/images/protokol.jpg`);
+
+  duration = 0;
 
   mounted() {
+    this.selection = parseInt(this.$route.query?.sesi?.toString() || '1', 10);
     const dDay = DateTime.fromFormat(
       '17/01/2021 09:30:00',
       'dd/MM/yyyy HH:mm:ss'
@@ -21,6 +25,7 @@ export default class EventComponent extends Vue {
       const now = DateTime.local();
       const cntd = dDay.diff(now, 'second').toObject();
       const duration = Duration.fromObject(cntd);
+      this.duration = duration.seconds;
       this.countdown = duration.toFormat('dd:hh:mm:ss');
     }, 1000);
   }
