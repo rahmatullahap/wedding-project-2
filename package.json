@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Pranatadesta",
   "private": true,
-  "description": "Wedding Hasna & Rahmat",
+  "description": "Hasna & Rahmat Wedding",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build && nuxt-ts export",

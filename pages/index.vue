@@ -1,6 +1,6 @@
 <template>
   <v-app dark style="overflow: hidden">
-    <v-banner single-line sticky> #WeddingHasnaRahmat </v-banner>
+    <v-banner single-line sticky> #HasnaRahmatWedding </v-banner>
     <v-carousel hide-delimiters :show-arrows="false" height="250">
       <v-carousel-item
         v-for="(item, i) in items"

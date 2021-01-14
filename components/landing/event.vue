@@ -64,7 +64,7 @@
         </v-chip-group>
       </v-card-text>
 
-      <v-img height="250" :src="protocol"></v-img>
+      <v-img :src="protocol"></v-img>
 
       <!-- <v-card-actions>
       <v-btn color="primary lighten-2" text @click="reserve">

@@ -38,15 +38,15 @@ const config: Configuration = {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    titleTemplate: 'Wedding Hasna & Rahmat',
-    title: 'Wedding Hasna & Rahmat',
+    titleTemplate: 'Hasna & Rahmat Wedding',
+    title: 'Hasna & Rahmat Wedding',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: 'Wedding Hasna & Rahmat'
+        content: 'Hasna & Rahmat Wedding'
       }
     ],
     link: [
@@ -62,6 +62,10 @@ const config: Configuration = {
    * https://pwa.nuxtjs.org/modules/workbox.html
    */
   pwa: {
+    meta: {
+      title: 'Hasna & Rahmat Wedding',
+      description: 'Wedding'
+    },
     workbox: {
       pagesURLPattern: '^((?!(_db|changes)).)*$',
       workboxURL:
@@ -69,6 +73,10 @@ const config: Configuration = {
       cacheNames: {
         suffix: CACHE_VERSION
       }
+    },
+    manifest: {
+      name: 'Hasna & Rahmat Wedding',
+      short_name: 'HRWedding'
     }
   },
   /*

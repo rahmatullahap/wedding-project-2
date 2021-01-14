@@ -13,7 +13,7 @@ export default class EventComponent extends Vue {
   header = require(`~/assets/images/kologdam.jpg`);
   protocol = require(`~/assets/images/protokol.jpg`);
 
-  duration = 0;
+  duration = 1;
 
   mounted() {
     this.selection = parseInt(this.$route.query?.sesi?.toString() || '1', 10);

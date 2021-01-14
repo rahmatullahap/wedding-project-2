@@ -1,3 +1,1 @@
-## Wedding Project
-
-Wedding Hasna Karimah & Rahmatullah Arrizal
+Hasna Karimah & Rahmatullah Arrizal Wedding
