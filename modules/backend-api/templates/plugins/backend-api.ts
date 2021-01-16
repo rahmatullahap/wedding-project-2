@@ -12,7 +12,7 @@ export interface BackendAPIClientConfig {
   subscriptionUrl: string;
 }
 
-export interface EdgeCentralClientConfig {
+export interface ClientConfig {
   token: string;
 }
 
@@ -24,13 +24,13 @@ export class BackendAPIClient {
   /* eslint-disable no-useless-constructor */
   constructor(private config: BackendAPIClientConfig) {
     this.store = createInstance({
-      name: 'ec-client',
+      name: 'backend',
       driver: LOCALSTORAGE
     });
   }
 
   async getToken(): Promise<string> {
-    const config = await this.store.getItem<EdgeCentralClientConfig>('config');
+    const config = await this.store.getItem<ClientConfig>('config');
     return config?.token;
   }
 

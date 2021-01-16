@@ -167,6 +167,20 @@ const config: Configuration = {
       config.node = {
         fs: 'empty'
       };
+      if (
+        config.module.rules.find((r) => {
+          if (!r.loader) {
+            return false;
+          }
+          return /graphql/.test(r.loader as string);
+        })
+      ) {
+        return;
+      }
+      config.module.rules.push({
+        test: /\.(graphql|gql)$/,
+        loader: 'graphql-tag/loader'
+      });
     }
   }
 };

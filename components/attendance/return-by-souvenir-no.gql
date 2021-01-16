@@ -1,0 +1,13 @@
+mutation returnBySouvenirNo($souvenirNo: String!) {
+  attendance {
+    returnBySouvenirNo(souvenirNo: $souvenirNo) {
+      id
+      createdAt
+      name
+      detail
+      count
+      returnedAt
+      souvenirNo
+    }
+  }
+}

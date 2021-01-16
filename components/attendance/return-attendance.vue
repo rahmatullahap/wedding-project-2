@@ -26,7 +26,7 @@
             <v-btn @click.stop="closeDialog()">Batal</v-btn>
             <v-btn type="submit" :disabled="!valid" color="primary">
               <v-icon class="mr-2">mdi-content-save-outline</v-icon>
-              Pulangkan
+              Tukar
             </v-btn>
           </v-card-actions>
         </v-form>

@@ -1,0 +1,24 @@
+query getAttendances($keyword: String, $skip: Int, $limit: Int) {
+  attendance {
+    search(keyword: $keyword, skip: $skip, limit: $limit) {
+      count
+      results {
+        id
+        createdAt
+        name
+        detail
+        count
+        returnedAt
+        souvenirNo
+        guest {
+          id
+          name
+          nickname
+          detail
+          vip
+          session
+        }
+      }
+    }
+  }
+}

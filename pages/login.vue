@@ -12,16 +12,16 @@
                 <v-card-text>
                   <v-form>
                     <v-text-field
-                      label="Email"
+                      v-model="username"
+                      label="Username"
                       type="text"
-                      name="email"
-                      placeholder="misal budi@email.id"
+                      name="username"
                       append-icon="mdi-account"
                       filled
                     ></v-text-field>
 
                     <v-text-field
-                      id="password"
+                      v-model="password"
                       type="password"
                       label="Password"
                       name="password"
@@ -43,6 +43,12 @@
           </v-col>
         </v-row>
       </v-container>
+      <v-snackbar v-model="errorToast" :timeout="5000" color="error">
+        {{ errorMessage }}
+        <v-btn text icon @click="errorToast = false">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </v-snackbar>
     </v-main>
   </v-app>
 </template>

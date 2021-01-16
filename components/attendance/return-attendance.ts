@@ -1,6 +1,10 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { Mutation } from 'vuex-class';
+import returnBySouvenirNoDoc from './return-by-souvenir-no.gql';
 import { DateFilter } from '~/filters/date';
+import {
+  ReturnBySouvenirNoMutation,
+  ReturnBySouvenirNoMutationVariables
+} from '~/operation';
 
 /**
  * add task page
@@ -12,7 +16,6 @@ import { DateFilter } from '~/filters/date';
 })
 export default class ReturnAttendanceComponent extends Vue {
   @Prop({ required: true }) dialog: boolean;
-  @Mutation('attendance/returnBySouvenir') returnBySouvenir: any;
 
   loading = false;
   valid = false;
@@ -20,9 +23,26 @@ export default class ReturnAttendanceComponent extends Vue {
 
   mounted() {}
 
-  save() {
-    this.returnBySouvenir(this.souvenirNo);
-    this.closeDialog();
+  async save() {
+    this.loading = true;
+    if (this.souvenirNo) {
+      try {
+        await this.$backend.mutate<
+          ReturnBySouvenirNoMutation,
+          ReturnBySouvenirNoMutationVariables
+        >({
+          mutation: returnBySouvenirNoDoc,
+          variables: {
+            souvenirNo: this.souvenirNo
+          }
+        });
+        this.closeDialog();
+      } catch (err) {
+        const message = err?.message || err?.toString() || 'error';
+        this.$emit('error', message);
+      }
+    }
+    this.loading = false;
   }
 
   closeDialog() {

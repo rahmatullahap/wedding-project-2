@@ -10,9 +10,13 @@
         }"
         :headers="headers"
         :items="guests"
+        :loading="loading"
+        :options.sync="options"
+        :server-items-length="totalItems"
         item-key="id"
         class="elevation-1"
         no-data-text="Data kosong"
+        @pagination="pagination"
       >
         <template v-slot:top>
           <v-toolbar flat>
@@ -30,9 +34,9 @@
         <template v-slot:[`item.date`]="{ item }">
           {{ _.get(item, 'createdAt', '-') | date }}
         </template>
-        <template v-slot:[`item.status`]="{ item }">
+        <template v-slot:[`item.vip`]="{ item }">
           <v-chip v-if="_.get(item, 'vip', false)" color="primary" small>
-            VIP
+            {{ item.vip }}
           </v-chip>
         </template>
         <template v-slot:[`item.action`]="{ item }">

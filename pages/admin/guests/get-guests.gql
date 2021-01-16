@@ -1,0 +1,15 @@
+query getGuests($keyword: String, $skip: Int, $limit: Int) {
+  guest {
+    search(keyword: $keyword, skip: $skip, limit: $limit) {
+      count
+      results {
+        id
+        name
+        nickname
+        detail
+        vip
+        session
+      }
+    }
+  }
+}

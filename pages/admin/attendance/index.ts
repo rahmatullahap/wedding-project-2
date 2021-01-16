@@ -1,7 +1,15 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Mutation, State } from 'vuex-class';
+import { Mutation } from 'vuex-class';
+import getTotalGuestDoc from './get-total-guest.gql';
+import getAttendancesDoc from './get-attendances.gql';
 import { DateFilter } from '~/filters/date';
-import { Attendance } from '~/store/attendance';
+import {
+  Attendance,
+  GetAttendancesQuery,
+  GetAttendancesQueryVariables,
+  GetTotalGuestQuery,
+  GetTotalGuestQueryVariables
+} from '~/operation';
 
 /**
  * list of tasks page
@@ -15,8 +23,7 @@ import { Attendance } from '~/store/attendance';
 export default class AttendancePage extends Vue {
   @Mutation('dashboard/changeTitle') private changeTitle: any;
   @Mutation('dashboard/changeBreadcrumbs') private changeBreadcrumbs: any;
-  @Mutation('attendance/return') returnMutation: any;
-  @State((state) => state.attendance.list) items: Attendance[];
+
   headers = [
     { text: 'No Souvenir', value: 'souvenirNo', sortable: true },
     { text: 'Nama', value: 'name' },
@@ -43,7 +50,23 @@ export default class AttendancePage extends Vue {
   attendanceCount: number = 0;
   inRoomCount: number = 0;
 
-  mounted() {
+  options = {
+    page: 1,
+    itemsPerPage: 10
+  };
+
+  totalItems = 0;
+
+  errorToast = false;
+  errorMessage = '';
+  successToast = false;
+  successMessage = '';
+
+  keywords = '';
+
+  attendanceKeywordsTimer: NodeJS.Timeout;
+
+  async mounted() {
     this.changeTitle('Daftar Hadir Tamu');
     this.changeBreadcrumbs([
       {
@@ -53,24 +76,69 @@ export default class AttendancePage extends Vue {
         to: '/admin/attendance'
       }
     ]);
-    this.attendances = this.items;
-    this.countTotal();
+    await this.loadAttendances();
+    await this.countTotal();
   }
 
-  @Watch('items', { deep: true })
-  onItemsChange() {
-    this.countTotal();
+  @Watch('keywords')
+  onKeywordChange() {
+    // Items have already been requested
+    if (this.loading) return;
+
+    // cancel pending call
+    clearTimeout(this.attendanceKeywordsTimer);
+
+    // delay new call 500ms
+    this.attendanceKeywordsTimer = setTimeout(async () => {
+      await this.loadAttendances();
+    }, 500);
   }
 
-  countTotal() {
+  @Watch('pagination')
+  async pagination() {
+    await this.loadAttendances();
+  }
+
+  async countTotal() {
     this.attendanceCount = 0;
     this.inRoomCount = 0;
-    for (const att of this.items) {
-      this.attendanceCount += parseInt(att.count.toString(), 10);
-    }
-    for (const inr of this.items.filter((a) => !a.returnedAt)) {
-      this.inRoomCount += parseInt(inr.count.toString(), 10);
-    }
+    this.loading = true;
+    try {
+      const { data } = await this.$backend.query<
+        GetTotalGuestQuery,
+        GetTotalGuestQueryVariables
+      >({
+        query: getTotalGuestDoc,
+        fetchPolicy: 'network-only',
+        variables: {
+          onBuilding: true
+        }
+      });
+      this.inRoomCount = data?.attendance?.totalGuest?.totalInBuilding || 0;
+      this.attendanceCount = data?.attendance?.totalGuest?.total || 0;
+    } catch (error) {}
+    this.loading = false;
+  }
+
+  async loadAttendances() {
+    this.loading = true;
+    try {
+      const { data } = await this.$backend.query<
+        GetAttendancesQuery,
+        GetAttendancesQueryVariables
+      >({
+        query: getAttendancesDoc,
+        fetchPolicy: 'network-only',
+        variables: {
+          keyword: this.keywords,
+          skip: (this.options.page - 1) * this.options.itemsPerPage,
+          limit: this.options.itemsPerPage
+        }
+      });
+      this.attendances = data?.attendance?.search?.results || [];
+      this.totalItems = data?.attendance?.search?.count;
+    } catch (error) {}
+    this.loading = false;
   }
 
   addAttendance() {
@@ -81,12 +149,19 @@ export default class AttendancePage extends Vue {
     this.returnDialog = true;
   }
 
-  close() {
+  async close() {
     this.addDialog = false;
     this.returnDialog = false;
+    await this.loadAttendances();
+    await this.countTotal();
   }
 
-  returnGuest(id) {
-    this.returnMutation(id);
+  error(message: string) {
+    this.errorToast = true;
+    this.errorMessage = message;
   }
+
+  // editGuest(id) {
+
+  // }
 }

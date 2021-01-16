@@ -1,6 +1,6 @@
 generates:
   schema.json:
-    schema: http://localhost:7788/graphql
+    schema: http://localhost:8585/graphql
     plugins:
       - introspection
     config:

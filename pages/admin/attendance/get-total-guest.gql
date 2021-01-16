@@ -1,0 +1,8 @@
+query getTotalGuest($onBuilding: Boolean) {
+  attendance {
+    totalGuest(onBuilding: $onBuilding) {
+      total
+      totalInBuilding
+    }
+  }
+}

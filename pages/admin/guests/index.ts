@@ -1,7 +1,8 @@
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Mutation, State } from 'vuex-class';
+import { Mutation } from 'vuex-class';
+import getGuestsDoc from './get-guests.gql';
 import { DateFilter } from '~/filters/date';
-import { Guest } from '~/store/attendance';
+import { GetGuestsQuery, GetGuestsQueryVariables, Guest } from '~/operation';
 
 /**
  * list of tasks page
@@ -15,7 +16,6 @@ import { Guest } from '~/store/attendance';
 export default class GuestsPage extends Vue {
   @Mutation('dashboard/changeTitle') private changeTitle: any;
   @Mutation('dashboard/changeBreadcrumbs') private changeBreadcrumbs: any;
-  @State((state) => state.attendance.guests) items: Guest[];
   headers = [
     {
       text: '',
@@ -25,10 +25,17 @@ export default class GuestsPage extends Vue {
       width: 75
     },
     { text: 'Nama', value: 'name' },
-    { text: 'Panggilan', value: 'nickname', sortable: false },
     { text: 'Alamat', value: 'detail', sortable: false },
+    { text: 'VIP', value: 'vip', sortable: false },
     { text: '', align: 'right', value: 'action', sortable: false, width: 140 }
   ];
+
+  options = {
+    page: 1,
+    itemsPerPage: 10
+  };
+
+  totalItems = 0;
 
   addDialog = false;
   loading = false;
@@ -36,9 +43,11 @@ export default class GuestsPage extends Vue {
   guests: Guest[] = [];
   selectedGuest: Guest = null;
 
+  guestKeywordsTimer: NodeJS.Timeout;
+
   keywords = '';
 
-  mounted() {
+  async mounted() {
     this.changeTitle('Daftar Tamu');
     this.changeBreadcrumbs([
       {
@@ -48,21 +57,47 @@ export default class GuestsPage extends Vue {
         to: '/admin/guests'
       }
     ]);
-    this.guests = this.items;
+    await this.loadGuests();
   }
 
   @Watch('keywords')
   onKeywordChange() {
-    if (this.keywords === '') {
-      this.guests = this.items;
-    } else {
-      this.guests = this.items.filter(
-        (i) =>
-          i.name.toLowerCase().includes(this.keywords.toLowerCase()) ||
-          // i.nickname.toLowerCase().includes(this.keywords.toLowerCase()) ||
-          i.detail.toLowerCase().includes(this.keywords.toLowerCase())
-      );
-    }
+    // Items have already been requested
+    if (this.loading) return;
+
+    // cancel pending call
+    clearTimeout(this.guestKeywordsTimer);
+
+    // delay new call 500ms
+    this.guestKeywordsTimer = setTimeout(async () => {
+      await this.loadGuests();
+    }, 500);
+  }
+
+  async loadGuests() {
+    this.loading = true;
+    try {
+      const { data } = await this.$backend.query<
+        GetGuestsQuery,
+        GetGuestsQueryVariables
+      >({
+        query: getGuestsDoc,
+        fetchPolicy: 'network-only',
+        variables: {
+          keyword: this.keywords,
+          skip: (this.options.page - 1) * this.options.itemsPerPage,
+          limit: this.options.itemsPerPage
+        }
+      });
+      this.guests = data?.guest?.search?.results || [];
+      this.totalItems = data?.guest?.search?.count;
+    } catch (error) {}
+    this.loading = false;
+  }
+
+  @Watch('pagination')
+  async pagination() {
+    await this.loadGuests();
   }
 
   addAttendance(guestId) {

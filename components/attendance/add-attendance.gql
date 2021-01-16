@@ -1,0 +1,21 @@
+mutation addAttendance($data: AttendanceData!) {
+  attendance {
+    addAttendance(data: $data) {
+      id
+      createdAt
+      name
+      detail
+      count
+      returnedAt
+      souvenirNo
+      guest {
+        id
+        name
+        nickname
+        detail
+        vip
+        session
+      }
+    }
+  }
+}
